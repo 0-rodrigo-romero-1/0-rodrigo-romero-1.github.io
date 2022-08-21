@@ -11,7 +11,7 @@ document.getElementById("Entrada").addEventListener("click", function(validacion
         alert ("La informacion ingresada no es valida, intentelo de nuevo");
         validacion.preventDefault();
     }else{
-        alert ("Acceso permitido, Bienvenido al sitio");
+        alert ("Acceso permitido, bienvenido al sitio");
         irasitio();
         validacion.preventDefault();
     }
