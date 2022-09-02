@@ -1,4 +1,3 @@
-const PRODUCTSAUTOS_URL = "https:japceibal.github.io/emercado-api/cats_products/101.json";
 var currentProductsArray = [];
 
 function setProductID(id) {
@@ -33,7 +32,7 @@ function showProductList(){
     }
 
 document.addEventListener("DOMContentLoaded", function(l){
-    getJSONData(PRODUCTSAUTOS_URL).then(function(resultObj){
+    getJSONData(PRODUCTS_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
             currentProductsArray = resultObj.data
             showProductList()
