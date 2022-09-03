@@ -14,5 +14,7 @@ document.getElementById("Entrada").addEventListener("click", function(validacion
         alert ("Acceso permitido, bienvenido al sitio");
         irasitio();
         validacion.preventDefault();
+        let Usuario = document.getElementById("Correo").value;
+        localStorage.setItem("Mail", Usuario);
     }
 })

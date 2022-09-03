@@ -39,3 +39,15 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+document.addEventListener("DOMContentLoaded", function(){
+  let user = localStorage.getItem("Mail");
+  let htmlContentToAppend = "";
+  htmlContentToAppend += `
+  <div class="collapse navbar-collapse" id="navbarNav">
+  <ul class="navbar-nav w-100 justify-content-between">
+    <li class="nav-item">
+      <a class="nav-link active">${user}</a>
+    </li>`
+  document.getElementById("Navegador").innerHTML += htmlContentToAppend;
+})
