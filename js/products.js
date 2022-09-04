@@ -35,27 +35,27 @@ function showProductsList(){
     }
 
         document.getElementById("product-list-container").innerHTML = htmlContentToAppend;
+        console.log(currentProductsList);
     }
 
 document.addEventListener("DOMContentLoaded", function(l){
     getJSONData(PRODUCTS_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
-            currentProductsList = resultObj.data
-            showProductsList()
-            console.log(currentProductsList);
+            currentProductsList = resultObj.data;
+            showProductsList();
         }
     })
     //Agregado para la segunda entrega
     document.getElementById("ordenaAMayor").addEventListener("click", function(){
-        OrdenarProducts("ordenaAMayor");
+        ordenayMuestraProducts("ordenaAMayor");
     });
 
     document.getElementById("ordenaAMenor").addEventListener("click", function(){
-        OrdenarProducts("ordenaAMenor");
+        ordenayMuestraProducts("ordenaAMenor");
     });
 
     document.getElementById("ordenaPorVendidos").addEventListener("click", function(){
-        OrdenarProducts("ordenaPorVendidos");
+        ordenayMuestraProducts("ordenaPorVendidos");
     });
 
     document.getElementById("limpiarFiltro").addEventListener("click", function(){
@@ -95,44 +95,27 @@ document.addEventListener("DOMContentLoaded", function(l){
 let minPrice= undefined;
 let maxPrice= undefined;
 
-function sortCategories(criteria, array){
-    let result = [];
-    if (criteria === ORDER_ASC_BY_NAME)
+function ordenayMuestraProducts(condicion){
+    if (condicion === "ordenaAMenor")
     {
-        result = array.sort(function(a, b) {
-            if ( a.name < b.name ){ return -1; }
-            if ( a.name > b.name ){ return 1; }
+        currentProductsList.products.sort(function(a, b) {
+            if ( a.cost< b.cost ){ return -1; }
+            if ( a.cost > b.cost ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_DESC_BY_NAME){
-        result = array.sort(function(a, b) {
-            if ( a.name > b.name ){ return -1; }
-            if ( a.name < b.name ){ return 1; }
+    }else if (condicion === "ordenaAMayor"){
+        currentProductsList.products.sort(function(a, b) {
+            if ( a.cost > b.cost ){ return -1; }
+            if ( a.cost < b.cost ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_BY_PROD_COUNT){
-        result = array.sort(function(a, b) {
-            let aCount = parseInt(a.productCount);
-            let bCount = parseInt(b.productCount);
-
-            if ( aCount > bCount ){ return -1; }
-            if ( aCount < bCount ){ return 1; }
+    }else if (condicion === "ordenaPorVendidos"){
+        currentProductsList.products.sort(function(a, b) {
+            if ( a.soldCount > b.soldCount ){ return -1; }
+            if ( a.soldCount < b.soldCount ){ return 1; }
             return 0;
         });
     }
 
-    return result;
-}
-
-function sortAndShowCategories(sortCriteria, categoriesArray){
-    currentSortCriteria = sortCriteria;
-
-    if(categoriesArray != undefined){
-        currentCategoriesArray = categoriesArray;
-    }
-
-    currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
-
-    //Muestro las categorías ordenadas
-    showCategoriesList();
+    showProductsList();
 }
