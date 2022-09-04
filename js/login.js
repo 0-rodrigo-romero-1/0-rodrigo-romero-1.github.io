@@ -1,3 +1,4 @@
+//Para la primera entrega
 function irasitio(){
     window.location.href = "home.html";
 }
@@ -13,6 +14,7 @@ document.getElementById("Entrada").addEventListener("click", function(validacion
     }else{
         alert ("Acceso permitido, bienvenido al sitio");
         irasitio();
+        //para la segunda entrega
         validacion.preventDefault();
         let Usuario = document.getElementById("Correo").value;
         localStorage.setItem("Mail", Usuario);
