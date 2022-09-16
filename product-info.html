@@ -37,10 +37,31 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+    <div class="container" id="producto">
+
+    </div>
+    <div class="container" id="comentarios">
+      
+    </div>
+    <br>
+    <div class="container" id="formulario">
+      <h1>Dejanos un comentario con respecto al producto</h1>
+      <label for="opinion"> Tu opinion:</label>
+      <br>
+      <textarea id="opinion" name="comment" class="d-flex w-50 justify-content-between"></textarea>
+      <br>
+        <label for="puntaje"> Tu puntuacion:</label>
+        <br>
+        <select name="score" id="puntaje">
+            <option value="Default">1</option>
+            <option value="malo">2</option>
+            <option value="decente">3</option>
+            <option value="bueno">4</option>
+            <option value="perfecto">5</option>
+        </select>
+      <br>
+    <label for="comentar"></label>    
+    <input type="submit" class="button" value="Publicar Comentario">
     </div>
   </main>
   <footer class="text-muted">
