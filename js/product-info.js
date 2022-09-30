@@ -1,3 +1,5 @@
+//Agregado para la tercer entrega
+
 let infodelProducto = [];
 let comentariosdelProducto = [];
 
@@ -5,8 +7,9 @@ document.addEventListener("DOMContentLoaded", function(){
     getJSONData(PRODUCT_INFO_URL).then(function(ObjetoInfo){
         if (ObjetoInfo.status === "ok"){
             infodelProducto = ObjetoInfo.data
-            console.log(infodelProducto);
+            console.log(infodelProducto.relatedProducts);
             mostrarProducto();
+            mostrarProdRelacionados(infodelProducto.relatedProducts);
         }
     })
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(ObjetoComentarios){
@@ -14,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function(){
             comentariosdelProducto = ObjetoComentarios.data
             console.log(comentariosdelProducto);
             mostrarComentariosdelProducto();
+            cajadeComentarios();
         }
     })
 })
@@ -22,6 +26,7 @@ function mostrarProducto(){
     let productotoAppend = "";
     productotoAppend = `
     <h1>${infodelProducto.name}</h1>
+    <hr>
     <br>
     <h3>Precio</h3>
     <p>${infodelProducto.currency+ " " + infodelProducto.cost}</p>
@@ -81,4 +86,58 @@ function de1a5estrellas(valor){
     }
     console.log(estrellas);
     return estrellas;
+}
+
+//Agregado para la cuarta entrega
+
+function mostrarProdRelacionados(relacionados){
+    let relatedtoAppend="";
+    relatedtoAppend=`
+    <hr>
+    <h2> Productos similares a este de la misma categoria <h2>
+    `
+    for(let element of relacionados){
+        relatedtoAppend +=`
+        <div onclick="nuevoProducto(${element.id})" class="row" >
+        <div class="col-3">
+        <img src="${(element.image)}" class="img-thumbnail">
+        <p>"${(element.name)}"</p>
+        </div>
+        </div>
+        `
+    }
+    relatedtoAppend +=`
+    <br>
+    <hr>
+    `
+    document.getElementById("relacionados").innerHTML += relatedtoAppend;
+}
+
+function nuevoProducto(id){
+    localStorage.setItem("products", id);
+    window.location = "product-info.html"
+}
+
+function cajadeComentarios(){
+    let cajatoAppend = "";
+    cajatoAppend = `
+    <h1>Dejanos un comentario con respecto al producto</h1>
+    <label for="opinion"> Tu opinion:</label>
+    <br>
+    <textarea id="opinion" name="comment" class="d-flex w-50 justify-content-between"></textarea>
+    <br>
+      <label for="puntaje"> Tu puntuacion:</label>
+      <br>
+      <select name="score" id="puntaje">
+          <option value="Default">1</option>
+          <option value="malo">2</option>
+          <option value="decente">3</option>
+          <option value="bueno">4</option>
+          <option value="perfecto">5</option>
+      </select>
+    <br>
+   <label for="comentar"></label>    
+   <input type="submit" class="button" value="Publicar Comentario">
+    `
+    document.getElementById("formulario").innerHTML += cajatoAppend;
 }

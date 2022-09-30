@@ -40,8 +40,8 @@ let getJSONData = function(url){
     });
 }
 
-//Agregado para la segunda entrega
-document.addEventListener("DOMContentLoaded", function(){
+//Agregado para la segunda entrega (Obsoleto, ya que la cuarta entrega pide agregar funcionalidad a esto)
+/* document.addEventListener("DOMContentLoaded", function(){
   let user = localStorage.getItem("Mail");
   let htmlContentToAppend = "";
   htmlContentToAppend += `
@@ -50,5 +50,30 @@ document.addEventListener("DOMContentLoaded", function(){
     <li class="nav-item">
       <a class="nav-link active">${user}</a>
     </li>`
+  document.getElementById("Navegador").innerHTML += htmlContentToAppend;
+})
+*/
+
+//Cuarta Entrega
+function cerrarUsuario(){
+  user = localStorage.clear();
+  user = "";
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+  let user = localStorage.getItem("Mail");
+  let htmlContentToAppend = "";
+  htmlContentToAppend += `
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    ${user}
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="cart.html">Mi Carrito</a></li>
+    <li><a class="dropdown-item" href="my-profile.html">Mi Perfil</a></li>
+    <li><a class="dropdown-item" href="index.html" onclick="cerrarUsuario()">Cerrar Sesion</a></li>
+  </ul>
+  </div>  
+  `
   document.getElementById("Navegador").innerHTML += htmlContentToAppend;
 })
