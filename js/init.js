@@ -3,7 +3,7 @@ const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publi
 /*Modificado para la segunda entrega*/const PRODUCTS_URL = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`;
 /*Modificado para la tercera entrega*/const PRODUCT_INFO_URL = `https://japceibal.github.io/emercado-api/products/${localStorage.getItem("products")}.json`;
 /*Modificado para la tercera entrega*/const PRODUCT_INFO_COMMENTS_URL = `https://japceibal.github.io/emercado-api/products_comments/${localStorage.getItem("products")}.json`;
-const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
+/*Modificado para la quinta entrega*/const CART_INFO_URL = `https://japceibal.github.io/emercado-api/user_cart/${localStorage.getItem("idUsuario")}.json`;
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 

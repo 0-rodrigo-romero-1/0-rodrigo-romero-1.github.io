@@ -18,5 +18,7 @@ document.getElementById("Entrada").addEventListener("click", function(validacion
         validacion.preventDefault();
         let Usuario = document.getElementById("Correo").value;
         localStorage.setItem("Mail", Usuario);
+        //agregado para la quinta entrega
+        localStorage.setItem("idUsuario", 25801);
     }
 })
