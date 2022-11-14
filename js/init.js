@@ -55,16 +55,21 @@ let getJSONData = function(url){
 */
 
 //Cuarta Entrega
+
+//Funcion para Remover el correo del local storage y vaciar la variable "user"
 function cerrarUsuario(){
-  user = localStorage.clear();
+  user = localStorage.removeItem("Mail");
   user = "";
 }
 
+
+//Una vez cargado el DOM, se crea un boton estilo dropdown con la variable "user"
+//El boton aparece oculto por defecto.
 document.addEventListener("DOMContentLoaded", function(){
   let user = localStorage.getItem("Mail");
   let htmlContentToAppend = "";
   htmlContentToAppend += `
-  <div class="dropdown">
+  <div class="dropdown d-none" id="BotondeUsuario">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     ${user}
   </button>
@@ -76,4 +81,10 @@ document.addEventListener("DOMContentLoaded", function(){
   </div>  
   `
   document.getElementById("Navegador").innerHTML += htmlContentToAppend;
+  
+  //En caso de que se entrase por el apartado de login
+  //Se ejecuta una funcion para remover la clase que oculta el boton, haciendo que quede visible y dipsponible para el navegante
+  if(user!=null){
+  document.getElementById("BotondeUsuario").classList.remove("d-none");
+  }
 })

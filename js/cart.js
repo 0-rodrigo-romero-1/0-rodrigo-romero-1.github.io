@@ -242,7 +242,6 @@ function envioStandard() {
 }
 
 //Actualiza el subtotal del envio en la info de Costos cuando se selecciona la opcion de envio express
-
 function envioExpress() {
   let cantidad = document.getElementById("Contador").value;
   let valor = cantidad * carrito.articles[0].unitCost;
@@ -445,9 +444,11 @@ function validarCompra() {
   //Funcion que despliega un alert dependiendo de la validacion
   function mostrarResultadodeCompra() {
     if (validacion === false) {
+      //Si la compra fallo
       document.getElementById("compraFallo").classList.add("show");
       setTimeout(desaparecerAlerta, 1000)
     } else {
+      //Si la compra fue exitosa, tambien desabilita todos los inputs y luego te manda a la pagina principal del sitio
       document.getElementById("compraExitosa").classList.add("show");
       document.getElementById("Contador").setAttribute("disabled", "");
       document.getElementById("Calle").setAttribute("disabled", "");
@@ -460,11 +461,13 @@ function validarCompra() {
     }
   }
 
+  //Funcion que te manda a la pagina principal del sitio
   function mandaraHomePage() {
     showSpinner();
     window.location.href = "home.html"
   }
 
+  //Funcion para desaparecer la alerta en caso de que la compra falle
   function desaparecerAlerta() {
     setTimeout(function () {
       document.getElementById("compraFallo").classList.remove("show");

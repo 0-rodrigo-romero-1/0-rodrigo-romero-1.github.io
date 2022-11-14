@@ -1,13 +1,14 @@
 //Agregado para la tercer entrega
 
+// Variable que son array vacios, para poder trabajar con ellos en las siguientes funciones
 let infodelProducto = [];
 let comentariosdelProducto = [];
 
+//Hacemos un DOBLE fetch de estilo getJSONData para poder mostar la informacion del producto, sus relacionados, comentarios y poruqe no, una caja de comentarios para que el usuario pueda dejar uno (Sin funcionalidad xD)
 document.addEventListener("DOMContentLoaded", function(){
     getJSONData(PRODUCT_INFO_URL).then(function(ObjetoInfo){
         if (ObjetoInfo.status === "ok"){
             infodelProducto = ObjetoInfo.data
-            console.log(infodelProducto.relatedProducts);
             mostrarProducto();
             mostrarProdRelacionados(infodelProducto.relatedProducts);
         }
@@ -15,13 +16,13 @@ document.addEventListener("DOMContentLoaded", function(){
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(ObjetoComentarios){
         if (ObjetoComentarios.status === "ok"){
             comentariosdelProducto = ObjetoComentarios.data
-            console.log(comentariosdelProducto);
             mostrarComentariosdelProducto();
             cajadeComentarios();
         }
     })
 })
 
+//Funcion para mostrar la informacion del producto, que es appendeado a un div de clase container (que se encuentra en el HTML del mismo nombre)
 function mostrarProducto(){
     let productotoAppend = "";
     productotoAppend = `
@@ -51,6 +52,7 @@ function mostrarProducto(){
     document.getElementById("producto").innerHTML += productotoAppend;
 }
 
+//Funcion para mostrar los comentarios del producto y su puntuacion, que es appendeado a un div de clase container (que se encuentra en el HTML del mismo nombre)
 function mostrarComentariosdelProducto(){
     let comentariostoAppend="";
     comentariostoAppend = `
@@ -73,6 +75,7 @@ function mostrarComentariosdelProducto(){
     document.getElementById("comentarios").innerHTML += comentariostoAppend;
 }
 
+//Funcion que se invoca en la funcion mostrarComentariosdelProducto() para desplegar la puntuacion en forma de estrellas
 function de1a5estrellas(valor){
     let estrellas =[];
     for(let i=0; i<=4; i++){
@@ -84,12 +87,12 @@ function de1a5estrellas(valor){
             estrellas.push(nomarca);
         }
     }
-    console.log(estrellas);
     return estrellas;
 }
 
 //Agregado para la cuarta entrega
 
+//Funcion para mostrar los productos relacionados del mismo, que es appendeado a un div de clase container (que se encuentra en el HTML del mismo nombre)
 function mostrarProdRelacionados(relacionados){
     let relatedtoAppend="";
     relatedtoAppend=`
@@ -113,11 +116,13 @@ function mostrarProdRelacionados(relacionados){
     document.getElementById("relacionados").innerHTML += relatedtoAppend;
 }
 
+//Funcion que se invoca en mostrarProdRelacionados(), que permite dirigir al usuario al nuevo producto
 function nuevoProducto(id){
     localStorage.setItem("products", id);
     window.location = "product-info.html"
 }
 
+//Funcion para mostrar un "formulario" que permite al usuario dejar un comentario sobre el producto, que es appendeado a un div de clase container (que se encuentra en el HTML del mismo nombre. De vuelta, no tiene funcionalidad)
 function cajadeComentarios(){
     let cajatoAppend = "";
     cajatoAppend = `

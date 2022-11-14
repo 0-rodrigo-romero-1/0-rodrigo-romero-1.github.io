@@ -1,18 +1,23 @@
 //Para la primera entrega
+//La primera entrega utiliza funciones similares a las que hay en categories.js, alteradas para que funcionen con los productos
 
+//Empezamos creando un array vacio donde ira la lista de productos
 let currentProductsList = [];
 
+//Funcion que se llama en la funcion showProductsList() para permiter el ingreso a la pagina con la informacion del producto
 function setProductID(id) {
     localStorage.setItem("products", id);
     window.location = "product-info.html"
 }
 
+//Funcion que recorre el array y crea el listado de productos con su nombre, descripcion y otros elementos y luego lo inserta al HTML
 function showProductsList(){
 
     let htmlContentToAppend = "";
     for(let i = 0; i < currentProductsList.products.length; i++){
         let products = currentProductsList.products[i];
 
+        //Condiciones para permitir el filtrado de productos por precio
         if (((minPrice == undefined) || (minPrice != undefined && products.cost >= minPrice)) &&
         ((maxPrice == undefined) || (maxPrice != undefined && products.cost <= maxPrice))){
             htmlContentToAppend += `
@@ -35,9 +40,10 @@ function showProductsList(){
     }
 
         document.getElementById("product-list-container").innerHTML = htmlContentToAppend;
-        console.log(currentProductsList);
     }
 
+
+//Una vez cargado el DOM, hacemos un fetch estilo getJSONData, verificamos que se ejecuto bien, y mandamos su resultado como un objeto a la variable currentProductsList (Que esta ubicada al inicio del JS) y luego ejecutamos la funcion para mostrar los productos
 document.addEventListener("DOMContentLoaded", function(l){
     getJSONData(PRODUCTS_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
@@ -46,6 +52,8 @@ document.addEventListener("DOMContentLoaded", function(l){
         }
     })
     //Agregado para la segunda entrega
+
+    //Funciones para poder ordenar los productos por tres condiciones cuando se clickean los respectivos botones (los botones se encuentran en el HTML del mismo nombre. No resetean la lista)
     document.getElementById("ordenaAMayor").addEventListener("click", function(){
         ordenayMuestraProducts("ordenaAMayor");
     });
@@ -58,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function(l){
         ordenayMuestraProducts("ordenaPorVendidos");
     });
 
+    //Funcion para poder remover los filtros y resetear la lista
     document.getElementById("limpiarFiltro").addEventListener("click", function(){
         document.getElementById("rangoFiltroMinimo").value = "";
         document.getElementById("rangoFiltroMaximo").value = "";
@@ -67,8 +76,7 @@ document.addEventListener("DOMContentLoaded", function(l){
     });
 
     document.getElementById("aplicarFiltro").addEventListener("click", function(){
-        //Obtengo el mínimo y máximo de los intervalos para filtrar por el precio
-        //de los productos.
+        //Obtengo el mínimo y máximo de los intervalos para filtrar por el precio de los productos.
         minPrice = document.getElementById("rangoFiltroMinimo").value;
         maxPrice = document.getElementById("rangoFiltroMaximo").value;
 
@@ -85,7 +93,8 @@ document.addEventListener("DOMContentLoaded", function(l){
         else{
             maxPrice = undefined;
         }
-
+        
+        //Luego muestra los productos con los filtros aplicados, de ser ese el caso.
         showProductsList();
     });
 });
@@ -95,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function(l){
 let minPrice= undefined;
 let maxPrice= undefined;
 
+//Funcion que permite ordenar los productos, y luego llama a showProductsList() para mostrarlos en pantalla
 function ordenayMuestraProducts(condicion){
     if (condicion === "ordenaAMenor")
     {
